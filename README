@@ -1,0 +1,12 @@
+* Put evolver-0.1.jar and evolver.properties in to classpath
+
+* Change evolver.properties to suit your database
+
+* Create a package somewhere in your source tree to hold migration files
+
+* Create either Java or SQL migration files. The SQL files should start with a number. The Java files should have the name in the following format
+Revision<No>.java where <No> is the revision number. Java and SQL files can live together, as long as the revision numbers don't clash
+  
+* To run the migrations, run the class com.motn.evole.Evolver, with migrations, evolve-0.1.jar and evolver.properties under classpath
+
+* See examples.xml if you need an ant target for evolve

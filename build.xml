@@ -1,0 +1,38 @@
+<project name="evolve" default="dist" basedir=".">
+	<property file="build.properties"/>
+	<property name="src.dir" value="src"/>
+	<property name="classes.dir" value="classes"/>
+	<property name="evolve.dir" value="examples"/>
+	<property name="evolve.classes" value="examples"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="version.no" value="0.1"/>
+	<path id="evolve.classpath">
+		<fileset dir="${lib.dir}" includes="*.jar"/>
+		<dirset dir="${evolve.classes}"/>
+	</path>
+
+	<target name="init">
+		<mkdir dir="${classes.dir}"/>
+	</target>
+    <target name="compile-src" depends="init">
+		<javac
+			debug="true"
+    		srcdir="${src.dir}"
+			destdir="${classes.dir}"
+			classpathref="evolve.classpath"
+			nowarn="on"
+            source="1.5" target="1.5">
+			<src path="${src.dir}"/>
+		</javac>
+    	<copy todir="${classes.dir}">
+    		<fileset dir="${src.dir}" excludes="**/*.java"/>
+    	</copy>
+	</target>
+	<target name="dist" depends="compile-src">
+		<mkdir dir="dist"/>
+		<jar basedir="${classes.dir}" file="lib/evolve-${version.no}.jar" />
+	</target>
+	<target name="clean">
+		<delete dir="${classes.dir}"/>
+	</target>
+</project>
